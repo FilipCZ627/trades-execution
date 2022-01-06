@@ -20,6 +20,8 @@ class Trading(object):
             }
         })
 
+        os.makedirs('data', exist_ok=True)
+
         self.trading_logger = logging.getLogger('trading_logger')
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(processName)s - %(module)s - %(funcName)s: %(message)s')
         handler = logging.StreamHandler()
@@ -162,12 +164,12 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    API_KEY = 'JuYwoIb82lSqO9KlmQfYpYZHdcU1C1SFEPw09vqd'
-    API_SECRET = 'Mtvnb1p11oUCOnkwYJnh-DSkeZ6OnssC8ULRopeY'
-    API_SUBACCOUNT = 'test-3'
+    API_KEY = ''
+    API_SECRET = ''
+    API_SUBACCOUNT = ''
     MARKET = 'SXP-PERP'
     INTERVAL_S = 1440
     INTERVAL_F = 720
-    LEVERAGE = 2
+    LEVERAGE = 1
 
     main()
