@@ -40,7 +40,7 @@ class Trading(object):
 
         download_data.main(market=MARKET)
 
-        _info = self.ftx.loadMarkets()[MARKET.upper()]['info']
+        _info = self.ftx.loadMarkets()[f"{MARKET.upper().split('-')[0]}/USD:USD"]['info']
         self.size_increment = float(_info['sizeIncrement'])
 
         self.set_status_init()
