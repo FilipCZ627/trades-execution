@@ -38,7 +38,7 @@ class Trading(object):
         handler = logging.StreamHandler()
         handler.setFormatter(formatter)
         handler.setLevel(logging.INFO)
-        handler_2 = logging.FileHandler('data/trading.log', 'a')
+        handler_2 = logging.FileHandler(f'data/trading_{self.market}.log', 'a')
         handler_2.setFormatter(formatter)
         handler_2.setLevel(logging.DEBUG)
 
