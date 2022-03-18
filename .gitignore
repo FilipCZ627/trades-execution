@@ -118,3 +118,5 @@ venv.bak/
 !test-3.yaml
 
 data/*
+
+main.conf

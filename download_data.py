@@ -9,8 +9,8 @@ trading_logger = logging.getLogger('trading_logger')
 
 
 def get_api_data_csv(market):
-    if os.path.exists(f'data/ftx_{market.upper()}.csv'):
-        df = pd.read_csv(f'data/ftx_{market.upper()}.csv')
+    if os.path.exists(f'data/ftx_{market.lower()}.csv'):
+        df = pd.read_csv(f'data/ftx_{market.lower()}.csv')
         ts_from = int(df.iat[-1, 1] / 1000) + 60
         mode = 'a'
         header = False
@@ -24,7 +24,7 @@ def get_api_data_csv(market):
     data_w = []
     trading_logger.info('Wait for the ohlc data to be downloaded from ftx!')
     for i in range(ts_from, int(time.time()), 300000):
-        data = ftx.public_get_markets_market_name_candles(params={'market_name': market, 'resolution': 60, 'limit': 5000, 'start_time': i, 'end_time': i + 299940})['result']
+        data = ftx.public_get_markets_market_name_candles(params={'market_name': market.upper(), 'resolution': 60, 'limit': 5000, 'start_time': i, 'end_time': i + 299940})['result']
         for n in data:
             data_w.append(n)
         time.sleep(0.2)
@@ -42,7 +42,7 @@ def main(market):
         trading_logger.debug("No data to download.")
     else:
         df = df[~df.index.duplicated(keep='last')]
-        df.to_csv(f'data/ftx_{market}.csv', index=False, header=header, mode=mode)
+        df.to_csv(f'data/ftx_{market.lower()}.csv', index=False, header=header, mode=mode)
         trading_logger.debug(f'Downloading ohlc api data for {market} took {time.time() - start}.')
 
 
