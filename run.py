@@ -59,7 +59,11 @@ class Trading(object):
         self.set_status_init()
 
     def get_position_amount(self, price: float, side: str, exit: bool) -> float:
-        self.ftx.cancel_all_orders()
+        try:
+            self.ftx.cancel_all_orders()
+            time.sleep(.5)
+        except ExchangeError:
+            self.trading_logger.info('Order not found.')
         position_amount = 0
         result = self.ftx.private_get_account()['result']
         collateral = float(result['collateral'])
