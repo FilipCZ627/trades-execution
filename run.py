@@ -82,7 +82,7 @@ class Trading(object):
 
     def set_status(self, side: str, exit: bool) -> None:
         position_amount = 0
-        time.sleep(1)
+        time.sleep(30)
         positions = self.ftx.private_get_positions(params={'showAvgPrice': True})["result"]
         for item in positions:
             if item['future'] == self.market.upper():
