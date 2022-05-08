@@ -102,7 +102,7 @@ class Trading(object):
             self.status["status"] = 'sold'
             try:
                 if avg_open_price / self.status["avg_open_price"] < 0.995 and avg_open_price / self.status["avg_open_price"] > 0:
-                    close_loss = avg_open_price / self.status["avg_open_price"]
+                    close_loss = (avg_open_price / self.status["avg_open_price"]) * (position_amount / self.status["amount"])
                     self.trading_logger.debug(f'Adjusted tp {close_loss}.')
                     self.status["tp"] = avg_open_price * close_loss
                 else:
